@@ -29,11 +29,12 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     apt install wget && \
     apt-get update -qq && \
     apt install python-openstackclient -y && \
-    apt install python3-openstackclient -y 
+    apt install python3-openstackclient -y && \
+    pip install python-openstackclient==3.14.0 
 
 COPY *.list /etc/tempest/mcp_skip.list 
 COPY *.conf /etc/tempest/tempest.conf 
-#COPY run_tempest.sh /usr/bin/run-tempest
+COPY run_tempest.sh /etc/tempest/run-tempest
 COPY generate_resources.sh /etc/tempest/generate_resources
 COPY prepare.sh /etc/tempest/prepare
 
