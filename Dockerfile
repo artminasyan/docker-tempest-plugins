@@ -25,7 +25,18 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     git checkout $HEAT_TAG && \
     pip install -r requirements.txt && \
     pip install -r test-requirements.txt && \
-    pip install -e /heat-tempest-plugin/ && \    
+    pip install -e /heat-tempest-plugin/ && \
+    cd .. && \
+    git clone https://github.com/openstack/designate-tempest-plugin.git && cd designate-tempest-plugin && \
+    pip install -r requirements.txt && \
+    pip install -r test-requirements.txt && \
+    pip install -e /designate-tempest-plugin/ && \
+    cd .. && \
+    git clone https://github.com/openstack/barbican-tempest-plugin.git && cd barbican-tempest-plugin && \
+    pip install -r requirements.txt && \
+    pip install -r test-requirements.txt && \
+    pip install -e /barbican-tempest-plugin/ && \  
+    cd .. && \  
     apt install wget && \
     apt-get update -qq && \
     apt install python-openstackclient -y && \
@@ -51,4 +62,4 @@ WORKDIR /tempest
 
 ENV SOURCE_FILE /home/ubuntu/keystonercv3
 
-ENTRYPOINT ["run-tempest"]
+ENTRYPOINT ["/bin/bash"]
