@@ -4,8 +4,8 @@ For running tests on env you shoud check that api of nessesary plugin was run on
 If plugin is not running you should you use salt formula , for example: 
 # salt-call state.sls $NAME OF PLUGIN 
 
-In repository with docker: 
-# docker build .
+Execute : 
+# docker build -f docker-tempest-plugins/Dockerfile .
 # docker run --net host -v /root/:/home/ubuntu -tid -u root $image_id
 # docker exec -ti $docker_id bash
 

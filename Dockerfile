@@ -41,18 +41,11 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     apt install python3-openstackclient -y && \
     pip install python-openstackclient==3.14.0 
 
-COPY *.list /etc/tempest/mcp_skip.list 
-COPY *.conf /etc/tempest/tempest.conf 
-COPY run_tempest.sh /etc/tempest/run-tempest
-COPY generate_resources.sh /etc/tempest/generate_resources
-COPY prepare.sh /etc/tempest/prepare
-
-#RUN bash /etc/tempest/prepare
-#ENV LOG_DIR /home/rally/rally_reports/
-#ENV SET smoke
-#ENV CONCURRENCY 0
-#ENV TEMPEST_CONF tempest_generated.conf
-#ENV SKIP_LIST mcp_skip.list
+COPY docker-tempest-plugins/*.list /etc/tempest/mcp_skip.list
+COPY rally_reports/tempest_generated.conf /etc/tempest/tempest.conf
+COPY docker-tempest-plugins/run_tempest.sh /etc/tempest/run-tempest
+COPY docker-tempest-plugins/generate_resources.sh /etc/tempest/generate_resources
+COPY docker-tempest-plugins/prepare.sh /etc/tempest/prepare
 
 WORKDIR /tempest
 
