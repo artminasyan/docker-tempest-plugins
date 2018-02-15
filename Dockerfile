@@ -2,6 +2,8 @@ FROM ubuntu:16.04
 
 ENV TEMPEST_TAG="17.2.0"
 ENV HEAT_TAG="b4acd96ee35e8839c22ca6dc08034fca684a2a22"
+ENV BARBICAN_TAG = "ecce1f64f76ac2121091ec4310e715b392bcc678"
+ENV DESIGNATE_TAG = "a8e643ed7944700aa78ace7d0b47beeaeae11a9a"
 
 RUN apt-get update 
 RUN apt-get install git -y
@@ -23,18 +25,14 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     cd .. && \
     git clone https://github.com/openstack/heat-tempest-plugin.git && cd heat-tempest-plugin && \
     git checkout $HEAT_TAG && \
-    pip install -r requirements.txt && \
-    pip install -r test-requirements.txt && \
     pip install -e /heat-tempest-plugin/ && \
     cd .. && \
     git clone https://github.com/openstack/designate-tempest-plugin.git && cd designate-tempest-plugin && \
-    pip install -r requirements.txt && \
-    pip install -r test-requirements.txt && \
+    git checkout $DESIGNATE_TAG && \
     pip install -e /designate-tempest-plugin/ && \
     cd .. && \
     git clone https://github.com/openstack/barbican-tempest-plugin.git && cd barbican-tempest-plugin && \
-    pip install -r requirements.txt && \
-    pip install -r test-requirements.txt && \
+    git checkout $BARBICAN_TAG && \
     pip install -e /barbican-tempest-plugin/ && \  
     cd .. && \  
     apt install wget && \
