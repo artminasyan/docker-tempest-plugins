@@ -42,7 +42,7 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     pip install python-openstackclient==3.14.0 
 
 COPY *.list /var/lib/
-COPY *.conf /var/lib/
+#COPY *.conf /var/lib/
 COPY run_tempest.sh /usr/bin/run-tempest
 COPY generate_resources.sh /etc/tempest/generate_resources
 COPY prepare.sh /etc/tempest/prepare

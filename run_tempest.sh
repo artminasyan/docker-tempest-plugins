@@ -46,11 +46,21 @@ then
 fi
 export SKIP_LIST=$LOG_DIR$SKIP_LIST
 
+if [ -n "${REPORT_SUFFIX}" ]
+then
+    report="report_${REPORT_SUFFIX}"
+else
+    report='report_'$SET'_'`date +%F_%H-%M`
+fi
+
 
 cp /home/ubuntu/rally_reports/tempest_generated.conf /etc/tempest/tempest.conf  
 bash /etc/tempest/generate_resources
 bash /etc/tempest/prepare
 
-
+if [ -n "$CUSTOM" ]
+then
+    tempest run $CUSTOM
+fi 
 
 
