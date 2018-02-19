@@ -54,13 +54,13 @@ else
 fi
 
 
-cp /home/ubuntu/rally_reports/tempest_generated.conf /etc/tempest/tempest.conf  
+cp ${WORK_DIR}${GENERATED_CONF} /etc/tempest/tempest.conf  
 bash /etc/tempest/generate_resources
 bash /etc/tempest/prepare
 
-if [ -n "$CUSTOM" ]
-then
-    tempest run $CUSTOM
-fi 
+#if [ -n "$CUSTOM" ]
+#then
+#    tempest run $CUSTOM
+#fi 
 
 

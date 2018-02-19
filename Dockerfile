@@ -54,11 +54,13 @@ ENV SOURCE_FILE /home/ubuntu/keystonercv3
 ENV TEMPEST_CONF aio_mcp.conf
 ENV SKIP_LIST mcp_skip.list
 ENV PATH $PATH:/usr/bin/run-tempest
+ENV GENERATED_CONF tempest_generated.conf 
+ENV WORK_DIR /home/ubuntu/rally_reports/ 
 
 WORKDIR /tempest
 
 
 
 
-ENTRYPOINT ["run-tempest"]
+ENTRYPOINT ["/bin/bash"]
 
