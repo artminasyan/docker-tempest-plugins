@@ -2,8 +2,8 @@ FROM ubuntu:16.04
 
 ENV TEMPEST_TAG="17.2.0"
 ENV HEAT_TAG="b4acd96ee35e8839c22ca6dc08034fca684a2a22"
-ENV BARBICAN_TAG = "ecce1f64f76ac2121091ec4310e715b392bcc678"
-ENV DESIGNATE_TAG = "a8e643ed7944700aa78ace7d0b47beeaeae11a9a"
+ENV BARBICAN_TAG="ecce1f64f76ac2121091ec4310e715b392bcc678"
+ENV DESIGNATE_TAG="a8e643ed7944700aa78ace7d0b47beeaeae11a9a"
 
 RUN apt-get update 
 RUN apt-get install git -y
@@ -41,16 +41,24 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     apt install python3-openstackclient -y && \
     pip install python-openstackclient==3.14.0 
 
-COPY docker-tempest-plugins/*.list /etc/tempest/mcp_skip.list
-COPY rally_reports/tempest_generated.conf /etc/tempest/tempest.conf
-COPY docker-tempest-plugins/run_tempest.sh /etc/tempest/run-tempest
-COPY docker-tempest-plugins/generate_resources.sh /etc/tempest/generate_resources
-COPY docker-tempest-plugins/prepare.sh /etc/tempest/prepare
+COPY *.list /var/lib/
+COPY *.conf /var/lib/
+COPY run_tempest.sh /usr/bin/run-tempest
+COPY generate_resources.sh /etc/tempest/generate_resources
+COPY prepare.sh /etc/tempest/prepare
+
+RUN chmod +x /usr/bin/run-tempest
+
+ENV LOG_DIR /home/ubuntu/rally_reports/all/
+ENV SOURCE_FILE /home/ubuntu/keystonercv3
+ENV TEMPEST_CONF aio_mcp.conf
+ENV SKIP_LIST mcp_skip.list
+ENV PATH $PATH:/usr/bin/run-tempest
 
 WORKDIR /tempest
 
 
 
-ENV SOURCE_FILE /home/ubuntu/keystonercv3
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["run-tempest"]
+
