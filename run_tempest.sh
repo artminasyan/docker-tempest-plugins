@@ -17,21 +17,14 @@ then
     mkdir -p $LOG_DIR
 fi
 
-CONF_FILE_PATH="${LOG_DIR}/${TEMPEST_CONF}"
-if [[ "${TEMPEST_CONF:0:1}" = '/' ]]; then
-    CONF_FILE_PATH="${TEMPEST_CONF}"
+if [ -f $TEMPEST_CONF ]
+then
+    cp $TEMPEST_CONF /etc/tempest/tempest.conf
+else
+    echo "Please generate your tempest file"
+    exit 1
 fi
 
-if [ ! -f $CONF_FILE_PATH ]
-then
-    if [ -f /var/lib/$TEMPEST_CONF ]
-    then
-        cp /var/lib/$TEMPEST_CONF $CONF_FILE_PATH
-    else
-        echo "Please put your tempest.conf file to log_dir"
-        exit 1
-    fi
-fi
 export TEMPEST_CONF=$CONF_FILE_PATH
 
 if [ ! -f $LOG_DIR$SKIP_LIST ]
@@ -54,7 +47,6 @@ else
 fi
 
 
-cp ${WORK_DIR}${GENERATED_CONF} /etc/tempest/tempest.conf  
 bash /etc/tempest/generate_resources
 bash /etc/tempest/prepare
 

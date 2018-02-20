@@ -42,7 +42,6 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     pip install python-openstackclient==3.14.0 
 
 COPY *.list /var/lib/
-COPY *.conf /var/lib/
 COPY run_tempest.sh /usr/bin/run-tempest
 COPY generate_resources.sh /etc/tempest/generate_resources
 COPY prepare.sh /etc/tempest/prepare
@@ -51,11 +50,10 @@ RUN chmod +x /usr/bin/run-tempest
 
 ENV LOG_DIR /home/ubuntu/rally_reports/all/
 ENV SOURCE_FILE /home/ubuntu/keystonercv3
-ENV TEMPEST_CONF aio_mcp.conf
+ENV TEMPEST_CONF /home/ubuntu/rally_reports/tempest_generated.conf
 ENV SKIP_LIST mcp_skip.list
 ENV PATH $PATH:/usr/bin/run-tempest
-ENV GENERATED_CONF tempest_generated.conf 
-ENV WORK_DIR /home/ubuntu/rally_reports/ 
+
 
 WORKDIR /tempest
 
