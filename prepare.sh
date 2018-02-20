@@ -53,7 +53,7 @@ $option = $value
 
 export conf_file=/etc/tempest/tempest.conf
 
-source /home/ubuntu/keystonercv3
+source $$$$SOURCE_FILE
 
 iniset $conf_file heat_plugin username $OS_USERNAME
 iniset $conf_file heat_plugin password $OS_PASSWORD
