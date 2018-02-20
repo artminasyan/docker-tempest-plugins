@@ -62,5 +62,5 @@ WORKDIR /tempest
 
 
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["run-tempest"]
 
