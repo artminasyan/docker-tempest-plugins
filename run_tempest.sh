@@ -54,5 +54,5 @@ if [ -n "$CUSTOM" ]
 then
     tempest run $CUSTOM
 fi 
-
+testr last --subunit | subunit2junitxml > verification.xml
 

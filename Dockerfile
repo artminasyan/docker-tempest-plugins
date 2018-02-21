@@ -14,6 +14,8 @@ RUN apt-get install -y python2.7-dev python-dev libssl-dev
 RUN apt-get install -y python-libxml2 libxslt1-dev libsasl2-dev 
 RUN apt-get install -y libsqlite3-dev libldap2-dev libffi-dev git
 RUN pip install -U pyopenssl
+RUN pip install junitxml
+RUN pip install xunit2testrail
 RUN apt install vim -y 
 
 
