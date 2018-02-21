@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 
 ENV TEMPEST_TAG="17.2.0"
-ENV HEAT_TAG="b4acd96ee35e8839c22ca6dc08034fca684a2a22"
-ENV BARBICAN_TAG="ecce1f64f76ac2121091ec4310e715b392bcc678"
-ENV DESIGNATE_TAG="a8e643ed7944700aa78ace7d0b47beeaeae11a9a"
+ENV HEAT_TAG="87d66da2beffd3eb884d516cf45a31e55a19758d"
+ENV BARBICAN_TAG="c2d9b66975d3606379eec9f01f055847693c6949"
+ENV DESIGNATE_TAG=""
 
 RUN apt-get update 
 RUN apt-get install git -y
@@ -23,15 +23,15 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     pip install tempest==$TEMPEST_TAG && cd tempest && \
     testr init && \
     cd .. && \
-    git clone https://github.com/openstack/heat-tempest-plugin.git && cd heat-tempest-plugin && \
+    git clone https://gerrit.mcp.mirantis.net/packaging/sources/heat-tempest-plugin && cd heat-tempest-plugin && \
     git checkout $HEAT_TAG && \
     pip install -e /heat-tempest-plugin/ && \
     cd .. && \
-    git clone https://github.com/openstack/designate-tempest-plugin.git && cd designate-tempest-plugin && \
+    git clone https://gerrit.mcp.mirantis.net/packaging/sources/designate-tempest-plugin && cd designate-tempest-plugin && \
     git checkout $DESIGNATE_TAG && \
     pip install -e /designate-tempest-plugin/ && \
     cd .. && \
-    git clone https://github.com/openstack/barbican-tempest-plugin.git && cd barbican-tempest-plugin && \
+    git clone https://gerrit.mcp.mirantis.net/packaging/sources/barbican-tempest-plugin && cd barbican-tempest-plugin && \
     git checkout $BARBICAN_TAG && \
     pip install -e /barbican-tempest-plugin/ && \  
     cd .. && \  
