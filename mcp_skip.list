@@ -16,3 +16,9 @@ heat_tempest_plugin.tests.scenario.test_aodh_alarm.AodhAlarmTest.test_alarm: Ski
 heat_tempest_plugin.tests.functional.test_event_sinks.ZaqarEventSinkTest.test_events: Skipped we does't support Zaqar.
 heat_tempest_plugin.tests.functional.test_waitcondition.ZaqarWaitConditionTest.test_signal_queues: Skipped we does't support Zaqar.
 heat_tempest_plugin.tests.functional.test_purge.PurgeTest.test_purge: Skipped because of heat-manage does't support into docker.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_add_a_second_sub_port: By default TrunkAPI is not supported.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_add_first_sub_port: By default TrunkAPI is not supported.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_remove_last_sub_port_from_trunk: By default TrunkAPI is not supported.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_remove_sub_port_from_trunk: By default TrunkAPI is not supported.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_update_existing_sub_port_on_trunk: By default TrunkAPI is not supported.
+heat_tempest_plugin.tests.functional.test_create_update_neutron_trunk.UpdateTrunkTest.test_update_trunk_name_and_description: By default TrunkAPI is not supported.
