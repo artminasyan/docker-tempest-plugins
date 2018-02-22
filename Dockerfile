@@ -40,7 +40,10 @@ RUN git clone https://github.com/openstack/tempest.git -b $TEMPEST_TAG && \
     cd .. && \
     git clone https://gerrit.mcp.mirantis.net/packaging/sources/manila-tempest-plugin && cd manila-tempest-plugin && \
     git checkout $MANILA_TAG && \
-    pip install -e /manila-tempest-plugin/ && \  
+    pip install -e /manila-tempest-plugin/ && \
+    cd .. && \
+    git clone https://gerrit.mcp.mirantis.net/packaging/sources/ironic-tempest-plugin && cd ironic-tempest-plugin && \
+    pip install -e /ironic-tempest-plugin/ && \ 
     cd .. && \
     apt install wget && \
     apt-get update -qq && \
