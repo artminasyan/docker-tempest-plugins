@@ -30,7 +30,7 @@ if [ "$HEAT_NETWORK_COUNT" -lt 1 ]; then
   echo "Network heat-net already founded in Openstack, skiping.."
 fi
 
-if ["$FEDORA_IMAGE_COUNT" -lt 1 ]; then
+if [ "$FEDORA_IMAGE_COUNT" -lt 1 ]; then
   wget https://mirror.chpc.utah.edu/pub/fedora/linux/releases/27/CloudImages/x86_64/images/Fedora-Cloud-Base-27-1.6.x86_64.qcow2
   openstack image create "Fedora-Cloud-Base-27-1.6.x86_64" --file Fedora-Cloud-Base-27-1.6.x86_64.qcow2 --disk-format qcow2 --container-format bare --public
 else
