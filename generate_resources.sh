@@ -1,5 +1,6 @@
 #!/bin/bash -xe
 
+FEDORA_IMAGE_COUNT=$(openstack image list | grep -c Fedora-Cloud-Base-27-1.6.x86_64)
 HEAT_NETWORK_COUNT=$(openstack network list | grep -c heat-net)
 MICRO_FLAVOR_COUNT=$(openstack flavor list | grep -c m1.heat_micro)
 TINY_FLAVOR_COUNT=$(openstack flavor list | grep -c m1.heat_int)
@@ -12,7 +13,7 @@ else
 fi
 
 if [ "$TINY_FLAVOR_COUNT" -lt 1 ]; then
-  openstack flavor create "m1.heat_int" --disk 1
+  openstack flavor create "m1.heat_int" --disk 1 --ram 512
 else
   echo "Flavor m1.heat_int already founded in Openstack, skiping.."
 fi
@@ -29,3 +30,9 @@ if [ "$HEAT_NETWORK_COUNT" -lt 1 ]; then
   echo "Network heat-net already founded in Openstack, skiping.."
 fi
 
+if ["$FEDORA_IMAGE_COUNT" -lt 1 ]; then
+  wget https://mirror.chpc.utah.edu/pub/fedora/linux/releases/27/CloudImages/x86_64/images/Fedora-Cloud-Base-27-1.6.x86_64.qcow2
+  openstack image create "Fedora-Cloud-Base-27-1.6.x86_64" --file Fedora-Cloud-Base-27-1.6.x86_64.qcow2 --disk-format qcow2 --container-format bare --public
+else
+  echo "Fedora image already founded in OpenStack, skipping.."
+fi 
